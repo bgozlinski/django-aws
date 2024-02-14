@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'lynx'
 
+
 urlpatterns = [
     path('', views.index, name=''),
     path('register', views.register, name='register'),
