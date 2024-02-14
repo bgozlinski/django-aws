@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -38,6 +37,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+# Added new apps to django project
+INSTALLED_APPS += [
+    'lynx',
+]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
