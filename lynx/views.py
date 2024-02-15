@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm
+from .models import Profile
 
 
 def index(request):
@@ -12,7 +13,12 @@ def register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            # Query User credentials by using commit=False
+            current_user = form.save(commit=False)
             form.save()
+            # Linking default profile picture to User(FK)
+            profile = Profile.objects.create(user=current_user)
+
             return redirect('lynx:my-login')
 
     context = {'form': form}
