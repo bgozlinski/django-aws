@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 
-{% block content %} 
+{% block content %}
+    {% load crispy_forms_tags %}
 
     <title>Register | lynx</title>
-    <h1>Register</h1>
 
-    <form method="POST" autocomplete="off">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container form-layout">
+
+        <h1>Register</h1>
+        <br>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{ form.username|as_crispy_field }}
+            <br>
+            {{ form.email|as_crispy_field }}
+            <br>
+            {{ form.password1|as_crispy_field }}
+            <br>
+            {{ form.password2|as_crispy_field }}
+            <br>
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <br>
+        </form>
+
+    </div>
     
 {% endblock %}
