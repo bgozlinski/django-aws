@@ -3,6 +3,13 @@
 {% block content %} 
 
     <title>Dashboard | lynx</title>
-    <h1>Dashboard</h1>
+    <div class="container form-layout">
+    <br>
+        <h1>Dashboard</h1>
+        <hr>
+        <br>
+        <a href="{% url 'lynx:user-logout' %}">Logout</a>
+    </div>
+
     
 {% endblock %}
