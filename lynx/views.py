@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import CreateUserForm
 
 
 def index(request):
@@ -6,7 +7,16 @@ def index(request):
 
 
 def register(request):
-    return render(request, 'lynx/register.html')
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lynx:my-login')
+
+    context = {'form': form}
+    return render(request, 'lynx/register.html', context=context)
 
 
 def my_login(request):

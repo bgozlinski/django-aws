@@ -3,6 +3,12 @@
 {% block content %} 
 
     <title>Register | lynx</title>
-    <h1>register</h1>
+    <h1>Register</h1>
+
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
     
 {% endblock %}
