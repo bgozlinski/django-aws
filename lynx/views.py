@@ -5,6 +5,8 @@ from .models import Profile
 from django.contrib.auth.models import auth
 from django.contrib.auth import login, authenticate
 
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     return render(request, 'lynx/index.html')
@@ -46,10 +48,12 @@ def my_login(request):
     return render(request, 'lynx/my-login.html', context=context)
 
 
+@login_required(login_url='lynx:my-login')
 def dashboard(request):
     return render(request, 'lynx/dashboard.html')
 
 
+@login_required(login_url='lynx:my-login')
 def profile_management(request):
     return render(request, 'lynx/profile-management.html')
 
