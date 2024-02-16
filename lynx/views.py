@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, UpdateUserForm
 from .models import Profile
 
 from django.contrib.auth.models import auth
@@ -55,7 +55,18 @@ def dashboard(request):
 
 @login_required(login_url='lynx:my-login')
 def profile_management(request):
-    return render(request, 'lynx/profile-management.html')
+    user_form = UpdateUserForm(instance=request.user)
+
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('lynx:dashboard')
+
+    context = {'user_form': user_form}
+
+    return render(request, 'lynx/profile-management.html', context=context)
 
 
 def user_logout(request):
